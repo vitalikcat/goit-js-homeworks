@@ -11,7 +11,7 @@ const getUsersWithEyeColor = (users, color) =>
 console.log(getUsersWithEyeColor(users, "blue")); // [объект Moore Hensley, объект Sharlene Bush, объект Carey Barr]
 
 const getUsersWithGender = (users, gender) =>
-  users.filter(user => user.gender === gender);
+  users.filter(user => user.gender === gender).map(user => user.name);
 console.log(getUsersWithGender(users, "male")); // [ 'Moore Hensley', 'Ross Vazquez', 'Carey Barr', 'Blackburn Dotson' ]
 
 const getInactiveUsers = users => users.filter(user => user.isActive === false);
@@ -46,14 +46,11 @@ const getNamesSortedByFriendsCount = users =>
 console.log(getNamesSortedByFriendsCount(users));
 // [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
 
-const getSortedUniqueSkills = users => {
-  return users
-    .reduce((acc, user) => {
-      acc.push(...user.skills);
-      return acc;
-    }, [])
-    .filter((el, index, arr) => arr.indexOf(el) === index)
-    .sort();
-};
+const getSortedUniqueSkills = arr =>
+  arr
+    .reduce((acc, { skills }) => [...acc, ...skills], [])
+    .filter((e, i, a) => a.indexOf(e) === i)
+    .sort((a, b) => a.localeCompare(b, "en"));
 console.log(getSortedUniqueSkills(users));
+
 // [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
