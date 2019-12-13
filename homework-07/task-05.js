@@ -1,15 +1,11 @@
 "use strict";
 
-const tagInput = document.querySelector("input#name-input");
-const tagSpan = document.querySelector("span#name-output");
+const input = document.querySelector("input#name-input");
+const span = document.querySelector("span#name-output");
 
 const handleInput = event => {
   const inputText = event.currentTarget.value;
-  tagSpan.textContent = inputText;
+  const condition = inputText === '' ? span.textContent = 'незнакомец' : span.textContent = inputText;
+}
 
-  if (inputText === "") {
-    tagSpan.textContent = "незнакомец";
-  }
-};
-
-tagInput.addEventListener("input", handleInput);
+input.addEventListener("input", handleInput);
