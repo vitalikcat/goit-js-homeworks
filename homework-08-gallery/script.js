@@ -67,4 +67,5 @@ function handleClickOverlay(event) {
     container.classList.remove("is-open");
     lightBoxImage.src = "";
   }
+  event.stopPropagation();
 }
