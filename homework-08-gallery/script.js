@@ -34,9 +34,8 @@ const finishedGallery = createGalleryItems(galleryArray);
 // Метод добавляет готовую разметку галереи в DOM елемент ul.js-gallery
 gallery.insertAdjacentHTML("afterbegin", finishedGallery);
 
-const container = document.querySelector(".lightbox");
-const overlayImage = document.querySelector(".lightbox__image");
-const overlay = document.querySelector(".lightbox__content");
+const container = document.querySelector(".js-lightbox");
+const lightBoxImage = document.querySelector(".lightbox__image");
 const buttonClose = document.querySelector(
   'button[data-action="close-lightbox"]'
 );
@@ -49,19 +48,23 @@ function handleClickGallery(event) {
   const originalImageLink = event.target.dataset.source;
   console.log(originalImageLink);
   container.classList.add("is-open");
-  overlayImage.src = originalImageLink;
+  lightBoxImage.src = originalImageLink;
 }
 
 buttonClose.addEventListener("click", handleClickButton);
 
 function handleClickButton(event) {
   container.classList.remove("is-open");
-  overlayImage.src = false;
+  lightBoxImage.src = "";
 }
 
-overlay.addEventListener("click", handleClickOverlay);
+container.addEventListener("click", handleClickOverlay);
 
 function handleClickOverlay(event) {
-  container.classList.remove("is-open");
-  overlayImage.src = false;
+  const imageOverlay = event.target.previousElementSibling;
+
+  if (imageOverlay) {
+    container.classList.remove("is-open");
+    lightBoxImage.src = "";
+  }
 }
